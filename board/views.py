@@ -3,7 +3,7 @@ from rest_framework import authentication, permissions, viewsets, filters
 from .models import Task, Sprint
 from .serializers import TaskSerializer, SprintSerializer, UserSerializer
 from django.contrib.auth import get_user_model
-from .forms import TaskFilter
+from .forms import TaskFilter, SprintFilter
 
 
 User = get_user_model()
@@ -30,6 +30,7 @@ class DefaultMixin(object):
 class SprintViewSet(DefaultMixin, viewsets.ModelViewSet):
     queryset = Sprint.objects.order_by('end')
     serializer_class = SprintSerializer
+    filter_class = SprintFilter
     search_fields = ('name',)
     ordering_fields = ('end', 'name')
 
